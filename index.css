@@ -1,96 +1,126 @@
+/* Terra Fern Studios — minimalist styles */
+:root {
+  /* Sage green background and neutrals */
+  --bg: #A8BFA1;   /* sage */
+  --fg: #0f1720;   /* near-black text */
+  --muted: #47545c;/* subtle text */
+  --link: #0f5e4e; /* deep green link */
+  --ring: #0f5e4e33;
+  --card: #ffffff; /* white card */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #243127;    /* dark sage */
+    --fg: #e6edf3;
+    --muted: #a9b8c2;
+    --link: #76e1c7;
+    --ring: #76e1c733;
+    --card: #0e141a;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-	width: 100wh;
-	height: 90vh;
-	color: #fff;
-	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-	background-size: 400% 400%;
-	-webkit-animation: Gradient 15s ease infinite;
-	-moz-animation: Gradient 15s ease infinite;
-	animation: Gradient 15s ease infinite;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  display: grid;
+  place-items: center;
 }
 
-@-webkit-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+.wrap {
+  width: min(720px, 92vw);
+  padding: 10vh 4vw;
+  display: grid;
+  gap: 2rem;
 }
 
-@-moz-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+header h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  letter-spacing: 0.02em;
+  line-height: 1.05;
 }
 
-@keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+.tag {
+  margin: 0.5rem 0 0 0;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
 }
 
-h1,
-h6 {
-	font-family: 'Open Sans';
-	font-weight: 300;
-	text-align: center;
-	position: absolute;
-	top: 45%;
-	right: 0;
-	left: 0;
+.card {
+  border-radius: 16px;
+  background: var(--card);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
 }
 
-.shake {
-	animation: shake-animation 4.72s ease infinite;
-	transform-origin: 50% 50%;
-  }
-  .element {
-	margin: 0 auto;
-	width: 150px;
-	height: 150px;
-	background: red;
-  }
-  @keyframes shake-animation {
-	 0% { transform:translate(0,0) }
-	1.78571% { transform:translate(5px,0) }
-	3.57143% { transform:translate(0,0) }
-	5.35714% { transform:translate(5px,0) }
-	7.14286% { transform:translate(0,0) }
-	8.92857% { transform:translate(5px,0) }
-	10.71429% { transform:translate(0,0) }
-	100% { transform:translate(0,0) }
-  }
+.info {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+}
 
-  .backdrop {
-	  -moz-box-shadow: 0px 6px 5px #111; 
-	  -webkit-box-shadow: 0px 6px 5px #111; 
-	  box-shadow: 0px 2px 10px #111; 
-	  -moz-border-radius:190px; 
-	  -webkit-border-radius:190px; 
-	  border-radius:190px;
-  }
+.info a {
+  color: var(--link);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
 
-  .linktree {
-	  width: 120px;
-	  height: 120px;
-	  background-image: url("");
-	  background-size: cover;
-	  background-repeat: no-repeat;
-	  background-position: 50% 50%;
+.info a:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.dot {
+  inline-size: 0.6rem;
+  block-size: 0.6rem;
+  border-radius: 50%;
+  background: var(--link);
+  flex: 0 0 auto;
+  transform: translateY(1px);
+}
+
+/* Helpers */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+footer {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+footer .sep::before {
+  content: "·";
+  margin: 0 0.5ch;
+}
+
+/* Motion */
+@media (prefers-reduced-motion: no-preference) {
+  header h1 { animation: fadeUp 500ms ease-out both; }
+  .card      { animation: fadeUp 700ms ease-out both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
+}
